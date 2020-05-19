@@ -12,6 +12,7 @@ from objects.classes import Snake, Apple, Wall
 from ai.model import DuelingDQN, ReplayMemory
 from functools import wraps
 import time
+import os
 
 def timeit(method):
     @wraps(method)
@@ -196,6 +197,8 @@ def load_model(
     }
 
     try:
+        gd_name = "/content/drive/My Drive/" + md_name
+        md_name = gd_name if os.path.isfile(gd_name) else md_name
         checkpoint = torch.load(md_name, map_location=device)
         if not restart_models:
             policy_net.load_state_dict(checkpoint["dqn"])
