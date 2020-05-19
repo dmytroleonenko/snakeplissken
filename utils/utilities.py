@@ -167,7 +167,7 @@ def save_model(name, policy_net, target_net, optimizer, memories):
         },
         "/content/drive/My Drive/" + name,
     )
-
+    print("Model saved to GDrive!")
 
 @timeit
 def load_model(

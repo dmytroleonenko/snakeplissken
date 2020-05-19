@@ -27,8 +27,7 @@ if __name__ == "__main__":
         "restart_models": False,
         "restart_optim": False,
         "random_clean_memory": False,
-#        "opt": "rmsprop",
-        "opt": "sgd",
+        "opt": "rmsprop",
     }
 
     # Load model

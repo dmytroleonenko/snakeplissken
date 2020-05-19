@@ -61,7 +61,7 @@ if __name__ == "__main__":
     # Action to be executed by the agent
     action = None
     # Train phase
-    train, exploit, show_screen = True, True, False
+    train, exploit, show_screen = True, True, True
     options = {
         "restart_mem": False,
         "restart_models": False,
@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
     # Game Main loop
     while True:
-        if not show_screen:
+        if show_screen:
             for event in pyg.event.get():
                 if event.type == pyg.QUIT:
                     if train:
