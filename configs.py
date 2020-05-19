@@ -1,7 +1,7 @@
 import numpy as np
 
-FPS = 64
-FPS_PLAY = 48
+FPS = 512
+FPS_PLAY = 256
 
 W_WIDTH, W_HEIGHT = 150, 150
 
