@@ -158,6 +158,16 @@ def save_model(name, policy_net, target_net, optimizer, memories):
         name,
     )
     print("Model saved!")
+    torch.save(
+        {
+            "dqn": policy_net.state_dict(),
+            "target": target_net.state_dict(),
+            "optimizer": optimizer.state_dict(),
+            "memories": memories,
+        },
+        "/content/drive/My Drive/" + name,
+    )
+
 
 @timeit
 def load_model(
