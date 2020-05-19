@@ -12,7 +12,8 @@ import torch.nn.functional as F
 from configs import *
 from utils.utilities import *
 from ai.model import Transition
-
+from google.colab import drive
+drive.mount('/content/drive')
 
 def draw_object(scr, color, position):
     pyg.draw.rect(scr, color, position)
@@ -80,7 +81,7 @@ if __name__ == "__main__":
     # print(get_game_screen(screen, device).shape)
 
     # Load model
-    md_name = "snakeplissken_m2.model"
+    md_name = "/content/drive/snakeplissken_m2.model"
     policy_net, target_net, optimizer, memories = load_model(
         md_name, n_actions, device, **options
     )
@@ -277,7 +278,7 @@ if __name__ == "__main__":
             non_final_mask = torch.tensor(
                 tuple(map(lambda s: s is not None, batch.next_state)), device=device
             )
-            final_mask = 1 - non_final_mask
+            final_mask = ~non_final_mask
 
             non_final_next_states = torch.cat(
                 [s for s in batch.next_state if s is not None]
