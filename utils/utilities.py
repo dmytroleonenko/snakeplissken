@@ -10,7 +10,21 @@ import torch.optim as optim
 from configs import *
 from objects.classes import Snake, Apple, Wall
 from ai.model import DuelingDQN, ReplayMemory
+from functools import wraps
 
+def timeit(method):
+    @wraps(method)
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        if 'log_time' in kw:
+            name = kw.get('log_name', method.__name__.upper())
+            kw['log_time'][name] = int((te - ts) * 1000)
+        else:
+            print("%r  %2.2f ms\n" % (method.__name__, (te - ts) * 1000))
+        return result
+    return timed
 
 @jit(parallel=True, nogil=True, nopython=True)
 def random_position(x, y, width, height):
@@ -130,7 +144,7 @@ def start_game(width, height):
     apples = get_apples(width, height, get_snake_position(snake))
     return snake, apples
 
-
+@timeit
 def save_model(name, policy_net, target_net, optimizer, memories):
     print("Saving model... wait...")
     torch.save(
@@ -144,7 +158,7 @@ def save_model(name, policy_net, target_net, optimizer, memories):
     )
     print("Model saved!")
 
-
+@timeit
 def load_model(
     md_name,
     n_actions,

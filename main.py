@@ -17,26 +17,9 @@ if not os.path.isdir("/home/el"):
     drive.mount('/content/drive')
 
 
-def timeit(method):
-    @wraps(method)
-    def timed(*args, **kw):
-        ts = time.time()
-        result = method(*args, **kw)
-        te = time.time()
-        if 'log_time' in kw:
-            name = kw.get('log_name', method.__name__.upper())
-            kw['log_time'][name] = int((te - ts) * 1000)
-        else:
-            print("%r  %2.2f ms\n" % (method.__name__, (te - ts) * 1000))
-        return result
-    return timed
-
 def draw_object(scr, color, position):
     pyg.draw.rect(scr, color, position)
 
-@timeit
-def my_save_model(*args):
-    save_model(*args)
 def select_action(state, n_actions, steps_done):
     sample = np.random.random()
     eps_threshold = EPS_END + (EPS_START - EPS_END) * np.exp(
@@ -140,7 +123,7 @@ if __name__ == "__main__":
                             "good": good_long_memory,
                             "bad": bad_long_memory,
                         }
-                        my_save_model(md_name, policy_net, target_net, optimizer, memories)
+                        save_model(md_name, policy_net, target_net, optimizer, memories)
                     pyg.quit()
                     sys.exit()
 
