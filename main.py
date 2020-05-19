@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # print(get_game_screen(screen, device).shape)
 
     # Load model
-    md_name = "/content/drive/snakeplissken_m2.model"
+    md_name = "/content/drive/My Drive/snakeplissken_m2.model"
     policy_net, target_net, optimizer, memories = load_model(
         md_name, n_actions, device, **options
     )
