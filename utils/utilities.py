@@ -159,13 +159,7 @@ def save_model(name, policy_net, target_net, optimizer, memories):
     )
     print("Model saved!")
     torch.save(
-        {
-            "dqn": policy_net.state_dict(),
-            "target": target_net.state_dict(),
-            "optimizer": optimizer.state_dict(),
-            "memories": memories,
-        },
-        "/content/drive/My Drive/" + name,
+        {"dqn": policy_net.state_dict(), "target": target_net.state_dict()}, "/content/drive/My Drive/" + name
     )
     print("Model saved to GDrive!")
 
