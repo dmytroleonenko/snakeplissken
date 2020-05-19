@@ -11,6 +11,7 @@ from configs import *
 from objects.classes import Snake, Apple, Wall
 from ai.model import DuelingDQN, ReplayMemory
 from functools import wraps
+import time
 
 def timeit(method):
     @wraps(method)
