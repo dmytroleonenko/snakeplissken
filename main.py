@@ -6,19 +6,25 @@ import random
 import pygame as pyg
 from pygame.locals import *
 import torch
-from torch.optim import Adam, RMSprop
+from torch.optim import Adam, SGD, rmsprop
 from torch.optim.lr_scheduler import CyclicLR
 import torch.nn.functional as F
 from configs import *
 from utils.utilities import *
 from ai.model import Transition
-from google.colab import drive
-if not os.path.isdir("/content/drive"):
+try:
+    from google.colab import drive
+    IN_COLAB = True
+except ImportError as error:
+    IN_COLAB = False
+
+if IN_COLAB and not os.path.isdir("/content/drive"):
     drive.mount('/content/drive')
 
 
 def draw_object(scr, color, position):
     pyg.draw.rect(scr, color, position)
+
 
 def select_action(state, n_actions, steps_done):
     sample = np.random.random()
@@ -67,7 +73,7 @@ if __name__ == "__main__":
         "restart_models": False,
         "restart_optim": False,
         "random_clean_memory": False,
-        "opt": "rmsprop",
+        "opt": "SGD",
     }
 
     # Screen size
