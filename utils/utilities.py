@@ -1,5 +1,3 @@
-import pickle
-import numpy as np
 from numba import jit
 import pygame
 from PIL import Image
@@ -13,6 +11,7 @@ from ai.model import DuelingDQN, ReplayMemory
 from functools import wraps
 import time
 import os
+
 
 def timeit(method):
     @wraps(method)
@@ -103,6 +102,7 @@ def save_game_screen(fname, img):
             Image.fromarray(img).save(fname)
 
 
+
 def reload_apple(width, height, snake_pos):
     x, y = random_position(10, 10, width, height)
     collide = True
@@ -146,6 +146,7 @@ def start_game(width, height):
     apples = get_apples(width, height, get_snake_position(snake))
     return snake, apples
 
+
 @timeit
 def save_model(name, policy_net, target_net, optimizer, memories):
     print("Saving model... wait...")
@@ -163,6 +164,7 @@ def save_model(name, policy_net, target_net, optimizer, memories):
         {"dqn": policy_net.state_dict(), "target": target_net.state_dict()}, "/content/drive/My Drive/" + name
     )
     print("Model saved to GDrive!")
+
 
 @timeit
 def load_model(
