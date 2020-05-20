@@ -166,7 +166,6 @@ def save_model(name, policy_net, target_net, optimizer, memories):
     print("Model saved to GDrive!")
 
 
-@timeit
 def load_model(
     md_name,
     n_actions,
@@ -187,7 +186,7 @@ def load_model(
         optimizer = optim.RMSprop(
             policy_net.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM
         )
-    elif "sgd" in opt:
+    elif "SGD" in opt:
         optimizer = optim.SGD(
             policy_net.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM
         )
