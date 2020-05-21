@@ -236,14 +236,14 @@ if __name__ == "__main__":
         next_state = None
         # Give some points because it alive
         if not stop_game:
-            score = SNAKE_ALIVE_PRIZE if score == 0 else score
+            score += SNAKE_ALIVE_PRIZE
             next_state = get_next_state(screen, state, device)
 
         if train:
             reward = torch.tensor([score], device=device, dtype=torch.float)
             # Reward for the agent
             if not stop_game:
-                if score >= APPLE_PRIZE:
+                if score > 0:
                     good_long_memory.push(state, action, next_state, reward)
                 else:
                     # Store the transition in memory
